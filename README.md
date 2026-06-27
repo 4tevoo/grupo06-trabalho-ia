@@ -215,10 +215,16 @@ WEBHOOK_URL=https://seu-dominio.up.railway.app/
 
 ---
 
-## 👤 Autor
+## 👤 Autores
 
 **Victor Lima**
 - GitHub: [@aralimavictor](https://github.com/aralimavictor)
+
+**Yuri Vieira**
 - GitHub: [@DevYuriVieira](https://github.com/DevYuriVieira)
+
+**Yasmim Veríssimo**
 - GitHub: [@yasmimverissimo](https://github.com/yasmimverissimo)
+
+**Estêvão Cunha**
 - GitHub: [@4tevoo](https://github.com/4tevoo)
