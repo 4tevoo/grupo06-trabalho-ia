@@ -112,7 +112,7 @@ export function AbaNoticias() {
     setResumos(prev => ({ ...prev, [index]: { texto: null, loading: true, erro: false } }))
 
     try {
-      const apiKey = import.meta.env.VITE_ANTHROPIC_API_KEY
+      const apiKey = import.meta.env.VITE_GROQ_API_KEY
 
       const prompt = `Você é um analista financeiro. Acesse e analise o conteúdo da seguinte notícia financeira.
 
@@ -128,16 +128,14 @@ Com base nessas informações, gere:
 
 Responda em português brasileiro. Seja direto e conciso.`
 
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true',
+          'Authorization': `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          model: 'claude-opus-4-5',
+          model: 'llama-3.3-70b-versatile',
           max_tokens: 600,
           messages: [{ role: 'user', content: prompt }],
         }),
@@ -146,7 +144,7 @@ Responda em português brasileiro. Seja direto e conciso.`
       if (!response.ok) throw new Error('Erro na API')
 
       const data = await response.json()
-      const texto = data.content?.[0]?.text ?? 'Não foi possível gerar o resumo.'
+      const texto = data.choices?.[0]?.message?.content ?? 'Não foi possível gerar o resumo.'
 
       setResumos(prev => ({ ...prev, [index]: { texto, loading: false, erro: false } }))
     } catch {
@@ -363,7 +361,7 @@ Responda em português brasileiro. Seja direto e conciso.`
 
               {resumo?.erro && (
                 <div className="mt-3 flex items-center gap-2 text-xs text-red-500 bg-red-50 dark:bg-red-900/20 rounded-xl px-3 py-2">
-                  ❌ Não foi possível gerar o resumo. Verifique a chave <code className="font-mono">VITE_ANTHROPIC_API_KEY</code>.
+                  ❌ Não foi possível gerar o resumo. Verifique a chave <code className="font-mono">VITE_GROQ_API_KEY</code>.
                 </div>
               )}
 
