@@ -4,7 +4,7 @@ Dashboard financeiro em tempo real com cotações de moedas e criptomoedas, alim
 
 ## 🔗 Demo
 
-[dashboard-cotacoes.vercel.app](https://dashboard-cotacoes.vercel.app)
+[https://dashboard-cotacoes.vercel.app](https://grupo06-trabalho-ia.vercel.app)
 
 ---
 
