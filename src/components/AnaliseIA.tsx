@@ -54,23 +54,21 @@ Responda APENAS em JSON válido neste formato exato, sem texto fora do JSON:
   ]
 }`
 
-            const response = await fetch('https://api.anthropic.com/v1/messages', {
+            const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-api-key': import.meta.env.VITE_ANTHROPIC_API_KEY,
-                    'anthropic-version': '2023-06-01',
-                    'anthropic-dangerous-direct-browser-access': 'true',
+                    'Authorization': `Bearer ${import.meta.env.VITE_GROQ_API_KEY}`,
                 },
                 body: JSON.stringify({
-                    model: 'claude-sonnet-4-6',
-                    max_tokens: 1000,
+                    model: 'llama-3.3-70b-versatile',
                     messages: [{ role: 'user', content: prompt }],
+                    max_tokens: 1000,
                 }),
             })
 
             const data = await response.json()
-            const texto = data.content[0].text.replace(/```json|```/g, '').trim()
+            const texto = data.choices[0].message.content.replace(/```json|```/g, '').trim()
             const parsed: Analise = JSON.parse(texto)
             setAnalise(parsed)
         } catch {
@@ -120,14 +118,11 @@ Responda APENAS em JSON válido neste formato exato, sem texto fora do JSON:
 
             {analise && (
                 <div className="flex flex-col gap-4">
-                    {/* Resumo */}
                     <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4">
                         <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
                             {analise.resumo}
                         </p>
                     </div>
-
-                    {/* Tendências */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                         {analise.tendencias.map(t => {
                             const config = tendenciaConfig[t.tendencia]
