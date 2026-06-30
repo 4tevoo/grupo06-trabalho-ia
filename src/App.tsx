@@ -8,8 +8,10 @@ import { TabelaCotacoes } from './components/TabelaCotacoes'
 import { AbaNoticias } from './components/AbaNoticias'
 import { AnaliseIA } from './components/AnaliseIA'
 import { ComparadorIA } from "./components/ComparadorIA";
+import { PortfolioSimulado } from './components/PortfolioSimulado'
+import { AlertasPreco } from './components/AlertasPreco'
 
-type Aba = 'cotacoes' | 'noticias'
+type Aba = 'cotacoes' | 'noticias' | 'alertas' | 'portfolio'
 
 export default function App() {
   const [cotacoes, setCotacoes] = useState<Cotacao[]>([])
@@ -78,25 +80,24 @@ export default function App() {
         </button>
       </div>
 
-      <div className="flex gap-2 mb-6">
-        <button
-          onClick={() => setAba('cotacoes')}
-          className={`px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${aba === 'cotacoes'
-            ? 'bg-blue-600 text-white'
-            : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-            }`}
-        >
-          📈 Cotações
-        </button>
-        <button
-          onClick={() => setAba('noticias')}
-          className={`px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${aba === 'noticias'
-            ? 'bg-blue-600 text-white'
-            : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-            }`}
-        >
-          📰 Notícias
-        </button>
+      <div className="flex gap-2 mb-6 flex-wrap">
+        {[
+          { id: 'cotacoes' as Aba, label: '📈 Cotações' },
+          { id: 'noticias' as Aba, label: '📰 Notícias' },
+          { id: 'alertas' as Aba, label: '🔔 Alertas' },
+          { id: 'portfolio' as Aba, label: '📊 Portfólio' },
+        ].map(tab => (
+          <button
+            key={tab.id}
+            onClick={() => setAba(tab.id)}
+            className={`px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${aba === tab.id
+              ? 'bg-blue-600 text-white'
+              : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+              }`}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
 
       {aba === 'cotacoes' && (
@@ -121,6 +122,10 @@ export default function App() {
       )}
 
       {aba === 'noticias' && <AbaNoticias />}
+
+      {aba === 'alertas' && <AlertasPreco cotacoes={cotacoes} />}
+
+      {aba === 'portfolio' && <PortfolioSimulado cotacoes={cotacoes} />}
     </div>
   )
 }
