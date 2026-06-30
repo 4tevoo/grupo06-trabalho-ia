@@ -8,6 +8,8 @@ import { TabelaCotacoes } from './components/TabelaCotacoes'
 import { AbaNoticias } from './components/AbaNoticias'
 import { AnaliseIA } from './components/AnaliseIA'
 import { ComparadorIA } from "./components/ComparadorIA";
+import { PortfolioSimulado } from './components/PortfolioSimulado'
+import { AlertasPreco } from './components/AlertasPreco'
 
 type Aba = 'cotacoes' | 'noticias'
 
@@ -115,6 +117,8 @@ export default function App() {
             <GraficoHistorico cotacoes={[...cotacoes].reverse()} />
             <AnaliseIA cotacoes={cotacoes} />
             <ComparadorIA cotacoes={cotacoes} />
+            <AlertasPreco cotacoes={cotacoes} />
+            <PortfolioSimulado cotacoes={cotacoes} />
             <TabelaCotacoes cotacoes={cotacoes} />
           </div>
         )
