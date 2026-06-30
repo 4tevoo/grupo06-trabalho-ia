@@ -14,7 +14,7 @@ Dashboard financeiro em tempo real com cotações de moedas e criptomoedas, alim
 - ⚡ Atualização instantânea via Supabase Realtime
 - 📊 Gráficos históricos separados por moedas e cripto
 - 📉 Indicadores de máxima e mínima do dia
-- 🧠 Análise de IA com resumo do mercado e tendências (Claude)
+- 🧠 Análise de IA com resumo do mercado e tendências (Groq)
 - 📰 Aba de notícias financeiras internacionais
 - 🌙 Modo escuro / claro
 - 📱 Layout responsivo para mobile e desktop
@@ -33,7 +33,7 @@ Dashboard financeiro em tempo real com cotações de moedas e criptomoedas, alim
 | Banco de dados | Supabase (PostgreSQL) |
 | Realtime | Supabase Realtime (WebSocket) |
 | Automação | n8n |
-| IA | Anthropic Claude API |
+| IA | Groq API |
 | Notícias | NewsData.io API |
 | Testes | Vitest + Testing Library |
 | Deploy Frontend | Vercel |
@@ -125,7 +125,7 @@ Crie um arquivo `.env` na raiz do `frontend/`:
 VITE_SUPABASE_URL=https://seu-projeto.supabase.co
 VITE_SUPABASE_ANON_KEY=sua_chave_anon
 VITE_GNEWS_API_KEY=sua_chave_newsdata
-VITE_ANTHROPIC_API_KEY=sua_chave_anthropic
+VITE_GROQ_API_KEY=sua_chave_groq
 ```
 
 ---
